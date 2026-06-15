@@ -3,7 +3,7 @@ import sqlite3
 from pathlib import Path
 
 base_directory=Path(__file__).resolve().parent
-db_path=base_directory/"log_test.db"  #remember to change to fuel_logs.db after dev 
+db_path=base_directory/"logs.db"  #remember to change to fuel_logs.db after dev 
 
 def ini_db():
     mydb = sqlite3.connect(db_path)
