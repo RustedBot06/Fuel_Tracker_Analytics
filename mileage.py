@@ -20,12 +20,14 @@ def mil():
             listofdates.append(qrylist[i][2])
 
     return listofdates,mileages
+
 #mil per refill
 def date_mil():
     listofdates,mileages = mil()
     if len(listofdates)!=0: return list(zip(listofdates,mileages))
     else: return "Sufficient Data Unavailable"
     
+
 def net_avg_mil():
     listofdates,mileages = mil()
     if len(mileages)>=1:

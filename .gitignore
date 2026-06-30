@@ -1,2 +1,2 @@
 __pycache__/
-fuel_logs.db
+*.db
