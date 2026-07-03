@@ -62,16 +62,13 @@ while(True):
             continue
 
     elif n==3:  #View stats
-        stat_dict={1:("Mileage", mileage),
-                   2:("Total Money Spent ",tot_mon),
-                   3:("Total Fuel Purchased",tot_fuel),
-                   4:("Number of Refuels",no_refu),
-                   5:("Average Fuel Price per Litre",avg_prc_perlit),
-                   6:("Highest Fuel Price per Litre",highest_fuel_price_perlit),
-                   7:("Lowest Fuel Price per Litre",lowest_fuel_price_perlit),
-                   8:("Total Distance Covered",tot_dist),
-                   9:("Average Refuel Cost",avg_refu_prc),
-                  10:("View graphs", show_graphs) #NOT WORKING
+        stat_dict={1:("Summary",summary),
+                   2:("Mileage", mileage),
+                   3:("Total Money Spent ",tot_mon),
+                   4:("Average Fuel Price per Litre",avg_prc_perlit),
+                   5:("Highest Fuel Price per Litre",highest_fuel_price_perlit),
+                   6:("Lowest Fuel Price per Litre",lowest_fuel_price_perlit),
+                   7:("View graphs", show_graphs),
                     }
         print("_______________________________________________________")
         for keys,vals in stat_dict.items():
@@ -82,7 +79,9 @@ while(True):
 
         if x==1:
             stat_dict[1][1](count)
-        elif x!=1 and x in stat_dict:
+        elif x==2:
+            stat_dict[2][1](count)
+        elif x!=1 and x!=2 and x in stat_dict:
             stat_dict[x][1]()
         else: print("Invalid Choice")
 

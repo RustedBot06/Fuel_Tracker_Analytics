@@ -1,5 +1,5 @@
 from functions import DBCONNECTOR
-from mileage import date_mil,net_avg_mil
+from mileage import *
 #graph has sep file
 
 def mileage(x):
@@ -51,3 +51,30 @@ def tot_dist():
 def avg_refu_prc():
     x=DBCONNECTOR("SELECT AVG(price) FROM LOGS")
     print(x[0][0])
+
+def best_mil():
+    listofdates,mileages = mil()
+    return max(mileages)
+
+def worst_mil():
+    listofdates,mileages = mil()
+    return min(mileages)
+
+
+def summary(x):
+    print("====================")
+    print("Fuel Tracker Summary")
+    print("====================")
+    print(f"Entries:{x}")
+    print("Total Fuel:",end='')
+    tot_fuel()
+    print("Net Average Mileage:",end='')
+    net_avg_mil()
+    print("Best Mileage:",end='')
+    best_mil()
+    print("Worst Mileage:",end='')
+    worst_mil()
+    print("Total Distance Covered:",end='')
+    tot_dist()
+    print("Average Refuel Cost:",end='')
+    avg_refu_prc()
