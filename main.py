@@ -19,6 +19,7 @@ while(True):
         print("3. View stats")
         print("4. Delete Logs")
         print("5. Modify Entry")
+        print("6. Backup Data (csv)")
     n=int(input("Enter your choice:"))
     print("_______________________________________________________")
 
@@ -62,8 +63,8 @@ while(True):
 
     elif n==3:  #View stats
         stat_dict={1:("Mileage", mileage),
-                   2:("Total Money Spent: ",tot_mon),
-                   3:("Total Fuel Purchased:",tot_fuel),
+                   2:("Total Money Spent ",tot_mon),
+                   3:("Total Fuel Purchased",tot_fuel),
                    4:("Number of Refuels",no_refu),
                    5:("Average Fuel Price per Litre",avg_prc_perlit),
                    6:("Highest Fuel Price per Litre",highest_fuel_price_perlit),
@@ -120,6 +121,9 @@ while(True):
         else:
             print("Enter correct option number")
             continue
+
+    elif n==6:
+        backup()
 
     else:   #break
         print("enter valid option number")

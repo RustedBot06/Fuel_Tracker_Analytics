@@ -2,6 +2,7 @@ from datetime import date
 import sqlite3
 from pathlib import Path
 from validation import *
+import csv
 
 base_directory=Path(__file__).resolve().parent
 db_path=base_directory/"fuel_logs.db" 
@@ -88,3 +89,12 @@ def DBCONNECTOR(querystr, values=()):
 
     finally:
         mydb.close()
+
+def backup():
+    with open("Latest_Back.csv","w", newline=" ") as fout:
+        writerObj=csv.writer(fout)
+        header=['ID','Total Price','Volume Refueled','Odometer Reading','Date(YYYY-MM-DD)','Full tank refill(1=yes)']
+        writerObj.writerow(header)
+        data=[list(t) for t in DBCONNECTOR("SELECT * FROM LOGS")]
+        writerObj.writerows(data)
+    print("BackUp csv created")
