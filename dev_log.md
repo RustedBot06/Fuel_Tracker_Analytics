@@ -1,4 +1,4 @@
-## v0.2 Graph Improvements
+## v0.3 Graph Improvements
 
 Problem:
 - Mileage was earlier plotted against a single date(higher) despite representing an interval.

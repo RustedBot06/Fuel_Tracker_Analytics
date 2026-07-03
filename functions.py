@@ -1,6 +1,7 @@
 from datetime import date
 import sqlite3
 from pathlib import Path
+from validation import *
 
 base_directory=Path(__file__).resolve().parent
 db_path=base_directory/"fuel_logs.db" 
@@ -23,13 +24,23 @@ def ini_db():
         mydb.close()
 
 def inpt():
-    today=str(date.today())
-    price=float(input("Enter total price:"))
-    amt=float(input("Enter total vol of fuel filled in litres:"))
-    odo=float(input("Enter odometer reading:"))
-    isfull=int(input("Enter 1 if full refill, 0 for non full refill: "))
-    tupl=(price,amt,odo,today,isfull)
-    return tupl
+    try:
+        today=str(date.today())
+        price=float(input("Enter total price:"))
+        validate_price(price)
+        amt=float(input("Enter total vol of fuel filled in litres:"))
+        validate_amount(amt)
+        odo=float(input("Enter odometer reading:"))
+        prev_odo=DBCONNECTOR("SELECT odometer FROM LOGS WHERE ID = (SELECT MAX(ID) FROM LOGS)")
+        validate_odometer(odo, prev_odo[0][0] if prev_odo else 0)
+        isfull=int(input("Enter 1 if full refill, 0 for non full refill: "))
+        validate_full_refill_flag(isfull)
+        tupl=(price,amt,odo,today,isfull)
+        return tupl
+    except ValueError:
+        print("Enter valid numeric input")
+    except ValidationError as e:
+        print(f"Validation Error: {e}")
 
 def write(tupl):
     DBCONNECTOR("INSERT INTO LOGS (price, volume, odometer,date, is_full) VALUES (?,?, ?, ?, ?)", tupl)

@@ -2,11 +2,11 @@ from functions import *
 from stats import *
 from graphs import *
 
+ini_db()
 while(True):
     print("_______________________________________________________")
     print("-----WELCOME-----")
     print("Choose the from the following")
-    ini_db()
     count=DBCONNECTOR("SELECT COUNT(*) FROM LOGS")[0][0]
     if count==0:
         print("TABLE HAS NO RECORDS")
@@ -27,7 +27,8 @@ while(True):
 
     elif n==1:  #Add log
         tupl=inpt()
-        write(tupl)
+        if tupl:
+            write(tupl)
 
     elif n==2:  #View Logs
         print("_______________________________________________________")
@@ -59,7 +60,7 @@ while(True):
             print("enter a correct choice")
             continue
 
-    elif n==3:  #View stats under development
+    elif n==3:  #View stats
         stat_dict={1:("Mileage", mileage),
                    2:("Total Money Spent: ",tot_mon),
                    3:("Total Fuel Purchased:",tot_fuel),
@@ -86,13 +87,13 @@ while(True):
 
     elif n==4:  #Delete Logs
         print("_______________________________________________________")
-        print("1. For deleting whole Database.")
+        print("1. For deleting all entries.")
         print("2. For deleting latest entry.")
         x=int(input("Enter choice:"))
         print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _")
 
         if x==1:
-            DBCONNECTOR("DROP TABLE LOGS")
+            DBCONNECTOR("DDELETE FROM LOGS")
             print("-----ALL LOGS DELETED-----")
 
         elif x==2:
