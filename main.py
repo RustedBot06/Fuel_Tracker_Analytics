@@ -33,7 +33,7 @@ while(True):
 
     elif n==2:  #View Logs
         print("_______________________________________________________")
-        print("1. For viewing whole Database.")
+        print("1. For viewing whole Table.")
         print("2. For viewing logs within date range")
         print("3. For viewing logs within volume of fuel filled range")
         print("4. For viewing logs within price of fuel filled range")
