@@ -33,5 +33,5 @@ def net_avg_mil():
     if len(mileages)>=1:
         return sum(mileages)/len(mileages)
     else:
-        return "Sufficient Data Unavailable"
+        return None
 

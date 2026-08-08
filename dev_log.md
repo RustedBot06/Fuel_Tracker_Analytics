@@ -100,3 +100,7 @@ Future Ideas:
 - Data import functionality.
 - User-selectable export locations.
 - Automatic scheduled backups.
+
+01/08/2026
+Feature: A latest entry summary and comparison with avg metrics after new log.
+
