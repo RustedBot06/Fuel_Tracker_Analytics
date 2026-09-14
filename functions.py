@@ -1,28 +1,15 @@
 from datetime import date
-import sqlite3
-from pathlib import Path
 from validation import *
+from database import *
+from settings import *
 import csv
 
-base_directory=Path(__file__).resolve().parent
-db_path=base_directory/"fuel_logs.db" 
+def dispdefault():
+    print("Default Fuel Type:",DEFAULT_FUEL)
 
-def ini_db():
-    mydb = sqlite3.connect(db_path)
-    try:
-        cur = mydb.cursor()
-        cur.execute("""CREATE TABLE IF NOT EXISTS LOGS (
-                ID INTEGER PRIMARY KEY,
-                price REAL,
-                volume REAL,
-                odometer REAL,
-                date TEXT,
-                is_full INTEGER
-            )""")
-    except sqlite3.DatabaseError as e:
-        print("Database error:", e)
-    finally:
-        mydb.close()
+def changedefault(): #Not currently implemented anywhere as of 14.9.26
+    DEFAULT_FUEL=input("Please enter new default Fuel Type:")
+    return DEFAULT_FUEL
 
 def inpt():
     try:
@@ -36,7 +23,9 @@ def inpt():
         validate_odometer(odo, prev_odo[0][0] if prev_odo else 0)
         isfull=int(input("Enter 1 if full refill, 0 for non full refill: "))
         validate_full_refill_flag(isfull)
-        tupl=(price,amt,odo,today,isfull)
+        fuel_type=str(input("Click Enter to continue with default fuel type, else enter the fuel type:"))
+        if fuel_type=='': fuel_type=DEFAULT_FUEL
+        tupl=(price,amt,odo,today,isfull,fuel_type)
         return tupl
     except ValueError:
         print("Enter valid numeric input")
@@ -44,10 +33,10 @@ def inpt():
         print(f"Validation Error: {e}")
 
 def write(tupl):
-    DBCONNECTOR("INSERT INTO LOGS (price, volume, odometer,date, is_full) VALUES (?,?, ?, ?, ?)", tupl)
+    DBCONNECTOR("INSERT INTO LOGS (price, volume, odometer,date, is_full, Fuel_Type) VALUES (?,?, ?, ?, ?,?)", tupl)
 
 def print_records(L):
-    headers=["ID","Total Price","Litres Filled","Odometer Reading","Date(YYYY-MM-DD)","Is_Full"]
+    headers=["ID","Total Price","Litres Filled","Odometer Reading","Date(YYYY-MM-DD)","Is_Full","Fuel_Type"]
     tuples_list = L
 
     # 1. Dynamically find the maximum width needed for each column
@@ -68,27 +57,6 @@ def print_records(L):
     # 5. Print the data rows
     for row in tuples_list:
         print(fmt.format(*row))
-
-def DBCONNECTOR(querystr, values=()):
-    mydb = sqlite3.connect(db_path)
-
-    try:
-        cursor = mydb.cursor()
-
-        cursor.execute(querystr, values)
-
-        if querystr.strip().upper().startswith("SELECT"):
-            return cursor.fetchall()
-
-        else:
-            mydb.commit()
-            print("SUCCESSFUL COMMIT")
-
-    except sqlite3.DatabaseError as e:
-        print("Database error:", e)
-
-    finally:
-        mydb.close()
 
 def backup():
     with open("Latest_Back.csv","w", newline=" ") as fout:

@@ -2,6 +2,7 @@ from functions import *
 from stats import *
 from graphs import *
 from feature import *
+from database import *
 
 ini_db()
 while(True):
@@ -29,10 +30,11 @@ while(True):
 
     elif n==1:  #Add log
         prev_avg=net_avg_mil()
+        dispdefault()
         tupl=inpt()
         if tupl:
             write(tupl)
-            entry_summary(prev_avg,tupl)
+            entry_summary(prev_avg,tupl,count)
 
     elif n==2:  #View Logs
         print("_______________________________________________________")

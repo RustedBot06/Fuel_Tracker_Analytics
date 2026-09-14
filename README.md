@@ -132,6 +132,13 @@ Through this project I learned:
 * Console-based interface
 * Manual data entry
 * CSV export currently overwrites the previous backup file
+### Known Limitation — Data Verification
+
+* The current system allows some nonsensical/random entries that can produce invalid results, such as negative or unrealistic mileage.
+* More robust data validation and verification would be needed for a production-scale system.
+* For now, this is intentionally not being over-engineered because Fuel Tracker is a **personal-use project**.
+* Future versions may improve data verification if the project's scope expands.
+
 
 ## Author
 
