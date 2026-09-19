@@ -4,7 +4,7 @@ from mileage import *
 def entry_summary(prev_avg, tupl,count): #So long because of formatting~
     if count>=2:
         listofdates, mileages = mil() 
-        price, amount, odo, date, isfull = tupl 
+        price, amount, odo, date, isfull, fuel_type = tupl 
         current_mileage = mileages[-1] 
         last_mileage = mileages[-2] 
         print("\n" + "=" * 42) 

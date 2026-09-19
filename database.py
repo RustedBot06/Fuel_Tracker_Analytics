@@ -3,7 +3,7 @@ from pathlib import Path
 
 base_directory=Path(__file__).resolve().parent
 #test for update_db, og is "fuel_logs.db" 
-db_path=base_directory/"test_logs.db" 
+db_path=base_directory/"fuel_logs.db"#test_logs.db" 
 
 def ini_db():
     mydb = sqlite3.connect(db_path)

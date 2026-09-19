@@ -107,9 +107,9 @@ while(True):
 
     elif n==5:  #Modifying
         id=int(input("Enter ID to modify:"))
-        x=int(input("-----------\n1. To modify date\n2. To modify" \
+        x=int(input("-----------\n1. To modify date\n2. To modify " \
                     "odometer reading\n3. To modify total cost\n4. To modify total fuel filled" \
-                    "\nChoose an option:"))
+                    "\n5. To modify fuel type\nChoose an option:"))
         if x==1:
             new_date=str(input("Enter new date in YYYY-MM-DD(with hyphens):"))
             DBCONNECTOR("UPDATE LOGS SET date = ? WHERE ID = ?",(new_date,id))
@@ -117,11 +117,14 @@ while(True):
             od=int(input("Enter new odometer reading:"))
             DBCONNECTOR("UPDATE LOGS SET odometer = ? WHERE ID = ?",(od,id))
         elif x==3:
-            new_p=int(input("Enter new total cost:"))
+            new_p=float(input("Enter new total cost:"))
             DBCONNECTOR("UPDATE LOGS SET price = ? WHERE ID = ?",(new_p,id))
         elif x==4:
-            new_f=int(input("Enter new total volume of fuel filled:"))
+            new_f=float(input("Enter new total volume of fuel filled:"))
             DBCONNECTOR("UPDATE LOGS SET volume = ? WHERE ID = ?",(new_f,id))
+        elif x==5:
+            new_pt=input("Enter new type of fuel filled:")
+            DBCONNECTOR("UPDATE LOGS SET Fuel_Type = ? WHERE ID = ?",(new_pt,id))
         else:
             print("Enter correct option number")
             continue
